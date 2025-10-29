@@ -15,6 +15,10 @@ const isPublicOnlyRoute = createRouteMatcher([
 
 export default clerkMiddleware(async (auth, req) => {
   const { userId } = await auth();
+<<<<<<< HEAD
+=======
+  const currentUrl = new URL(req.url);
+>>>>>>> af728d70249d3bc8b6734eb4b10eb279c8f91120
 
   // 1. Protect user only routes
 
