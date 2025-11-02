@@ -31,14 +31,14 @@ export default function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
           {children}
+          <ToastContainer
+            position="bottom-right"
+            autoClose={5000}
+            closeOnClick={true}
+            pauseOnHover
+            transition={Bounce}
+          />
         </body>
-        <ToastContainer
-          position="bottom-right"
-          autoClose={5000}
-          closeOnClick={true}
-          pauseOnHover
-          transition={Bounce}
-        />
       </html>
     </ClerkProvider>
   );
