@@ -16,7 +16,7 @@ function VideoUpload() {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!file) return toast("Select video file");
-    if (file.size !== MaxFileSize) return toast("File size too large");
+    if (file.size > MaxFileSize) return toast("File size too large");
 
     const formData = new FormData();
     formData.append("file", file);
@@ -26,9 +26,9 @@ function VideoUpload() {
 
     setIsUploading(true);
     try {
-      const response = await axios.post("/api/protected/video", formData);
+      const response = await axios.post("/api/protected/upload/video", formData);
       if (response.status !== 200) throw new Error("Failed to send request");
-      router.push("/");
+      router.push("/dashboard");
     } catch (error) {
       console.log(error);
       toast(error instanceof Error ? error.message : "Uploading failed");

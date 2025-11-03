@@ -14,13 +14,12 @@ type ReturnType = {
 };
 
 export async function uploadFileToCloudinary(
-  file: File,
+  buffer: Buffer,
   resourceType: "image" | "video" = "image",
   destFolder = "images",
   opt: Record<string, any> = {}
 ): Promise<ReturnType> {
-  if (!file) throw new Error("No file received");
-  const buffer = Buffer.from(await file.arrayBuffer());
+  if (!buffer) throw new Error("No buffer received");
   const options = {
     folder: `next-cloudy-${destFolder}`,
     resource_type: resourceType,

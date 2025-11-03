@@ -21,11 +21,16 @@ export async function POST(req: NextRequest) {
     if (!file) {
       return NextResponse.json({ error: "File required" }, { status: 400 });
     }
-
     // video upload
-    const uploadResult = await uploadFileToCloudinary(file, "video", "videos", {
-      transformation: [{ quality: "auto", fetch_format: "mp4" }],
-    });
+    const buffer = Buffer.from(await file.arrayBuffer());
+    const uploadResult = await uploadFileToCloudinary(
+      buffer,
+      "video",
+      "videos",
+      {
+        transformation: [{ quality: "auto", fetch_format: "mp4" }],
+      }
+    );
 
     const video = await prisma.video.create({
       data: {
